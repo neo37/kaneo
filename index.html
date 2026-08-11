@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaneo · 3D Board Demo</title>
+<style>
+  :root{
+    --bg:#09090b; --panel:#111113; --card:#18181b; --border:#27272a;
+    --text:#fafafa; --muted:#a1a1aa; --accent:#6366f1; --accent-2:#818cf8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);
+    font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    height:100vh;overflow:hidden;display:flex;flex-direction:column;user-select:none;}
+  header{display:flex;align-items:center;gap:12px;padding:10px 16px;
+    border-bottom:1px solid var(--border);background:var(--panel);z-index:5;}
+  header .logo{font-weight:700;font-size:15px;letter-spacing:.3px;}
+  header .logo span{color:var(--accent-2);}
+  header .crumb{color:var(--muted);font-size:13px;}
+  .switch{margin-left:auto;display:flex;gap:4px;background:var(--card);
+    border:1px solid var(--border);border-radius:8px;padding:3px;}
+  .switch button{border:none;background:transparent;color:var(--muted);
+    font-size:12px;font-weight:600;padding:4px 12px;border-radius:6px;cursor:pointer;}
+  .switch button.active{background:var(--accent);color:#fff;}
+  header a{color:var(--muted);font-size:12px;text-decoration:none;margin-left:14px;}
+  header a:hover{color:var(--text);}
+
+  #stage{position:relative;flex:1;overflow:hidden;}
+  #viewport{position:absolute;inset:0;perspective:1200px;cursor:grab;touch-action:none;}
+  #viewport.grabbing{cursor:grabbing;}
+  #world{position:absolute;width:100%;height:100%;transform-style:preserve-3d;
+    transition:transform .1s ease-out;pointer-events:none;}
+  #board{position:absolute;top:50%;left:50%;transform-style:preserve-3d;}
+
+  .column{pointer-events:auto;position:absolute;width:300px;max-height:560px;
+    display:flex;flex-direction:column;border-radius:12px;
+    border:1px solid var(--border);background:rgba(24,24,27,.92);
+    box-shadow:0 20px 50px rgba(0,0,0,.5);transform-style:preserve-3d;}
+  .column h2{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+    padding:10px 12px;border-bottom:1px solid var(--border);}
+  .column h2 .dot{width:8px;height:8px;border-radius:50%;}
+  .column h2 .count{margin-left:auto;font-size:11px;color:var(--muted);
+    background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1px 7px;}
+  .tasks{padding:8px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;}
+  .task{background:var(--card);border:1px solid var(--border);border-radius:9px;
+    padding:10px 12px;cursor:pointer;transition:border-color .15s, transform .15s;}
+  .task:hover{border-color:var(--accent);}
+  .task .num{font-size:11px;color:var(--muted);margin-bottom:3px;}
+  .task .title{font-size:13px;line-height:1.4;}
+  .task .meta{display:flex;align-items:center;gap:6px;margin-top:8px;}
+  .task .prio{font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;}
+  .prio.high{background:#7f1d1d;color:#fecaca;}
+  .prio.urgent{background:#9a3412;color:#fed7aa;}
+  .prio.medium{background:#1e3a8a;color:#bfdbfe;}
+  .prio.low{background:#14532d;color:#bbf7d0;}
+  .task .assignee{margin-left:auto;width:20px;height:20px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:10px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;}
+
+  #board2d{position:absolute;inset:0;display:none;gap:14px;padding:18px;
+    overflow-x:auto;}
+  #board2d .column{position:static;width:280px;flex-shrink:0;box-shadow:none;
+    background:var(--panel);}
+
+  .hint{position:absolute;left:14px;bottom:14px;font-size:11px;color:var(--muted);
+    background:rgba(17,17,19,.85);border:1px solid var(--border);border-radius:7px;
+    padding:5px 10px;pointer-events:none;z-index:4;}
+  #reset{position:absolute;right:14px;bottom:14px;z-index:4;
+    background:var(--card);border:1px solid var(--border);color:var(--muted);
+    font-size:12px;border-radius:7px;padding:6px 14px;cursor:pointer;}
+  #reset:hover{color:var(--text);border-color:var(--accent);}
+
+  #sheet{position:absolute;top:0;right:-380px;width:360px;height:100%;z-index:6;
+    background:var(--panel);border-left:1px solid var(--border);
+    transition:right .25s ease;padding:20px;display:flex;flex-direction:column;gap:12px;}
+  #sheet.open{right:0;}
+  #sheet .num{color:var(--muted);font-size:12px;}
+  #sheet h3{font-size:16px;line-height:1.4;}
+  #sheet p{font-size:13px;color:var(--muted);line-height:1.6;}
+  #sheet .close{align-self:flex-end;background:none;border:none;color:var(--muted);
+    font-size:18px;cursor:pointer;}
+  #sheet .close:hover{color:var(--text);}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">kaneo<span>·3D</span></span>
+  <span class="crumb">Demo Workspace / 3D Board</span>
+  <div class="switch">
+    <button id="btn2d">Board</button>
+    <button id="btn3d" class="active">3D</button>
+  </div>
+  <a href="https://github.com/neo37/kaneo" target="_blank">GitHub ↗</a>
+</header>
+
+<div id="stage">
+  <div id="viewport">
+    <div id="world"><div id="board"></div></div>
+  </div>
+  <div id="board2d"></div>
+  <div class="hint">drag: pan · ctrl/right-drag: rotate · wheel: zoom · click a card</div>
+  <button id="reset">⟲ Reset</button>
+  <aside id="sheet">
+    <button class="close" onclick="sheet.classList.remove('open')">✕</button>
+    <div class="num" id="sheet-num"></div>
+    <h3 id="sheet-title"></h3>
+    <p id="sheet-desc"></p>
+  </aside>
+</div>
+
+<script>
+const COLUMNS = [
+  { name:"To Do", color:"#a1a1aa", tasks:[
+    { n:1, t:"Ship the 3D board view", p:"high", a:"AK", d:"Turn the flat kanban board into a spatial scene with CSS 3D transforms. Columns get perspective, cards stay fully interactive." },
+    { n:2, t:"Camera controls: pan, rotate, zoom", p:"medium", a:"MB", d:"Left-drag pans the camera, right-drag or Ctrl+drag rotates it, the mouse wheel zooms. One button resets the view." },
+    { n:6, t:"Keyboard shortcut for view switch", p:"low", a:"AK", d:"Extend the existing view-switch shortcuts with the 3D mode." },
+  ]},
+  { name:"In Progress", color:"#818cf8", tasks:[
+    { n:3, t:"Cover the 3D view with tests", p:"medium", a:"VK", d:"Vitest + Testing Library: rendering, camera math, drag/zoom handling, hit-testing, task navigation." },
+    { n:4, t:"Fork and open the pull request", p:"urgent", a:"VK", d:"Fork usekaneo/kaneo, push the feature branch and describe the 3D visualization properly." },
+  ]},
+  { name:"In Review", color:"#fbbf24", tasks:[
+    { n:5, t:"Fix hit-testing under preserve-3d", p:"high", a:"MB", d:"The full-screen world plane was swallowing clicks meant for the cards. pointer-events: none on the plane, auto on the columns." },
+  ]},
+  { name:"Done", color:"#34d399", tasks:[
+    { n:0, t:"Study CSS perspective math", p:"low", a:"AK", d:"translate3d + rotateX/rotateY on a preserve-3d world, perspective on the viewport, camera as plain state." },
+  ]},
+];
+
+const world = document.getElementById("world");
+const board = document.getElementById("board");
+const board2d = document.getElementById("board2d");
+const viewport = document.getElementById("viewport");
+const sheet = document.getElementById("sheet");
+
+function makeColumn(col){
+  const el = document.createElement("div");
+  el.className = "column";
+  el.innerHTML = `<h2><span class="dot" style="background:${col.color}"></span>${col.name}<span class="count">${col.tasks.length}</span></h2>`;
+  const tasks = document.createElement("div");
+  tasks.className = "tasks";
+  col.tasks.forEach(t => {
+    const card = document.createElement("div");
+    card.className = "task";
+    card.innerHTML = `<div class="num">#${t.n}</div><div class="title">${t.t}</div>
+      <div class="meta"><span class="prio ${t.p}">${t.p}</span><span class="assignee">${t.a}</span></div>`;
+    card.onclick = () => {
+      document.getElementById("sheet-num").textContent = "DEMO-" + t.n;
+      document.getElementById("sheet-title").textContent = t.t;
+      document.getElementById("sheet-desc").textContent = t.d;
+      sheet.classList.add("open");
+    };
+    tasks.appendChild(card);
+  });
+  el.appendChild(tasks);
+  return el;
+}
+
+// 3D layout
+const W = 300, GAP = 60;
+const total = COLUMNS.length * W + (COLUMNS.length - 1) * GAP;
+COLUMNS.forEach((col, i) => {
+  const el = makeColumn(col);
+  const x = i * (W + GAP) - total / 2;
+  const center = (COLUMNS.length - 1) / 2;
+  const off = i - center;
+  el.style.transform = `translate3d(${x}px, -150px, ${-Math.abs(off) * 40}px) rotateY(${-off * 6}deg)`;
+  board.appendChild(el);
+});
+// 2D layout
+COLUMNS.forEach(col => board2d.appendChild(makeColumn(col)));
+
+// camera
+let cam;
+function resetCam(){ cam = { x:0, y:0, z: innerWidth < 768 ? -2200 : -900, rx:12, ry:-18 }; apply(); }
+function apply(){ world.style.transform =
+  `translate3d(${-cam.x}px, ${-cam.y}px, ${cam.z}px) rotateX(${cam.rx}deg) rotateY(${cam.ry}deg)`; }
+resetCam();
+
+let drag = null;
+viewport.addEventListener("pointerdown", e => {
+  if (e.target.closest(".task") || e.target.closest("button")) return;
+  drag = { mode: (e.button === 2 || e.ctrlKey || e.shiftKey) ? "rot" : "pan", x: e.clientX, y: e.clientY };
+  viewport.setPointerCapture?.(e.pointerId);
+  viewport.classList.add("grabbing");
+});
+viewport.addEventListener("pointermove", e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (drag.mode === "pan"){ const s = cam.z / -1200; cam.x -= dx * s; cam.y -= dy * s; }
+  else { cam.ry += dx * .3; cam.rx = Math.min(80, Math.max(-80, cam.rx - dy * .3)); }
+  drag.x = e.clientX; drag.y = e.clientY; apply();
+});
+const end = () => { drag = null; viewport.classList.remove("grabbing"); };
+viewport.addEventListener("pointerup", end);
+viewport.addEventListener("pointercancel", end);
+viewport.addEventListener("wheel", e => {
+  e.preventDefault();
+  cam.z = Math.min(-200, Math.max(-10000, cam.z + e.deltaY * 2));
+  apply();
+}, { passive:false });
+viewport.addEventListener("contextmenu", e => e.preventDefault());
+document.getElementById("reset").onclick = resetCam;
+
+// 2D/3D switch — 3D is the default
+const btn2d = document.getElementById("btn2d"), btn3d = document.getElementById("btn3d");
+function setMode(m){
+  btn2d.classList.toggle("active", m === "2d");
+  btn3d.classList.toggle("active", m === "3d");
+  viewport.style.display = m === "3d" ? "block" : "none";
+  document.querySelector(".hint").style.display = m === "3d" ? "block" : "none";
+  document.getElementById("reset").style.display = m === "3d" ? "block" : "none";
+  board2d.style.display = m === "2d" ? "flex" : "none";
+}
+btn2d.onclick = () => setMode("2d");
+btn3d.onclick = () => setMode("3d");
+</script>
+</body>
+</html>
