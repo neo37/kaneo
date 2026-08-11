@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://kaneo.app">
+  <a href="https://neo37.github.io/kaneo/">
     <img src="https://assets.kaneo.app/logo-text.png" alt="Kaneo's logo" width="450" />
   </a>
 </p>
@@ -17,7 +17,7 @@
   <h3>
     <a href="https://kaneo.app/docs/core">Quick Start</a>
     <span> | </span>
-    <a href="https://kaneo.app">Website</a>
+    <a href="https://neo37.github.io/kaneo/">3D Demo</a>
     <span> | </span>
     <a href="https://cloud.kaneo.app">Cloud</a>
     <span> | </span>
