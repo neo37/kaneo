@@ -26,6 +26,36 @@ input:-webkit-autofill:active {
 }
 
 @font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-latin.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200 800;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-cyrillic.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200 800;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-cyrillic-ext.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200 800;
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+    U+FE2E-FE2F;
+}
+
+@font-face {
   font-family: "Paper Mono";
   src: url("./assets/fonts/PaperMono-Regular.woff2") format("woff2");
   font-display: swap;
@@ -270,28 +300,36 @@ input:-webkit-autofill:active {
 
 @custom-variant bp (&:is(.bp *));
 
+/* Тёмная BP-тема: подключается вместе с классом .dark (см. ThemeProvider)
+   и переопределяет его токены — фон #1A1A1A, рама и сайдбар #000000,
+   белый только для текста и заливки primary-кнопок. */
 .bp {
   --font-sans: "Manrope", "Roboto", Arial, ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Times New Roman", Times, serif;
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --accent-foreground: #000000;
-  --secondary-foreground: #1a1a1a;
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card-foreground: #ffffff;
+  --popover-foreground: #ffffff;
+  --accent-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
   --primary: var(--color-bp-primary);
   --primary-foreground: #ffffff;
   --ring: var(--color-bp-primary);
-  --sidebar: #ffffff;
-  --sidebar-foreground: color-mix(in srgb, #1a1a1a 72%, var(--sidebar));
+  --warning: var(--color-bp-orange);
+  --warning-foreground: var(--color-bp-orange);
+  --sidebar: #000000;
+  --sidebar-foreground: color-mix(in srgb, #ffffff 72%, var(--sidebar));
   --sidebar-primary: var(--color-bp-primary);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent-foreground: #000000;
+  --sidebar-accent-foreground: #ffffff;
   --sidebar-ring: var(--color-bp-primary);
   --chart-1: var(--color-bp-primary);
   --chart-2: var(--color-bp-orange);
+}
+
+.bp ::selection {
+  background-color: var(--color-bp-primary);
+  color: #ffffff;
 }
 
 @layer base {

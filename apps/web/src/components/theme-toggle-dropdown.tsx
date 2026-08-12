@@ -43,7 +43,9 @@ export function ThemeToggleDropdown() {
           className={cn(
             "flex h-6 min-w-7 items-center justify-center rounded-full px-1 transition-colors duration-300 ease-out",
             theme === option.value
-              ? "bg-background text-foreground shadow-sm"
+              ? option.value === "bp"
+                ? "bg-background text-bp-primary shadow-sm"
+                : "bg-background text-foreground shadow-sm"
               : "text-muted-foreground/70 hover:text-foreground",
           )}
         >
