@@ -332,6 +332,35 @@ input:-webkit-autofill:active {
   color: #ffffff;
 }
 
+/* Мозаика из логотипов BP на фоне канбан-доски — только в теме bp.
+   Лежит под колонками (контент доски поднят на z-index 1). */
+.bp .bp-board-watermark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/logo-bp.svg");
+  background-size: 180px auto;
+  background-position: 24px 24px;
+  background-repeat: space;
+  opacity: 0.05;
+}
+
+/* Логотип BP в пустой нижней части каждой колонки доски — только в теме bp. */
+.bp .bp-column-watermark::after {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  width: 128px;
+  height: 40px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: url("/logo-bp.svg") center / contain no-repeat;
+  opacity: 0.09;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
