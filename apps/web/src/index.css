@@ -248,9 +248,9 @@ input:-webkit-autofill:active {
   --code-highlight: --alpha(var(--color-white) / 4%);
 }
 
-/* BP core style — дефолтная тема BusinessPad.
-   Переопределяет базовые токены Kaneo: палитра #FFFFFF/#1A1A1A/#000000/#7C88FC,
-   текстовые акценты #000000/#FFFFFF/#FF8562, шрифты Times New Roman/Manrope/Roboto/Arial. */
+/* BP core style — отдельная тема BusinessPad (класс .bp на <html>, выбирается
+   переключателем рядом с light/dark). Палитра #FFFFFF/#1A1A1A/#000000/#7C88FC,
+   текстовые акценты #FF8562, шрифты Manrope/Roboto/Arial + Times New Roman. */
 @theme {
   --color-bp-primary: #7c88fc;
   --color-bp-orange: #ff8562;
@@ -268,38 +268,27 @@ input:-webkit-autofill:active {
   --spacing-bp-18-8: 18.8px;
 }
 
-:root {
+@custom-variant bp (&:is(.bp *));
+
+.bp {
   --font-sans: "Manrope", "Roboto", Arial, ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Times New Roman", Times, serif;
   --background: #ffffff;
   --foreground: #1a1a1a;
+  --card: #ffffff;
   --card-foreground: #1a1a1a;
+  --popover: #ffffff;
   --popover-foreground: #1a1a1a;
-  --accent-foreground: #1a1a1a;
+  --accent-foreground: #000000;
   --secondary-foreground: #1a1a1a;
   --primary: var(--color-bp-primary);
   --primary-foreground: #ffffff;
   --ring: var(--color-bp-primary);
+  --sidebar: #ffffff;
+  --sidebar-foreground: color-mix(in srgb, #1a1a1a 72%, var(--sidebar));
   --sidebar-primary: var(--color-bp-primary);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-ring: var(--color-bp-primary);
-  --chart-1: var(--color-bp-primary);
-  --chart-2: var(--color-bp-orange);
-}
-
-.dark {
-  --background: #1a1a1a;
-  --foreground: #ffffff;
-  --card-foreground: #ffffff;
-  --popover-foreground: #ffffff;
-  --accent-foreground: #ffffff;
-  --secondary-foreground: #ffffff;
-  --primary: var(--color-bp-primary);
-  --primary-foreground: #ffffff;
-  --ring: var(--color-bp-primary);
-  --sidebar: #000000;
-  --sidebar-primary: var(--color-bp-primary);
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent-foreground: #000000;
   --sidebar-ring: var(--color-bp-primary);
   --chart-1: var(--color-bp-primary);
   --chart-2: var(--color-bp-orange);

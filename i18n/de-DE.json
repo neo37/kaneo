@@ -449,6 +449,7 @@
 			"themeLight": "Hell",
 			"themeDark": "Dunkel",
 			"themeSystem": "System",
+			"themeBp": "BP",
 			"language": "Sprache",
 			"languageDescription": "Wähle deine bevorzugte Oberflächensprache",
 			"selectLanguage": "Sprache auswählen",

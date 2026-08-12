@@ -1,37 +1,55 @@
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useId } from "react";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/cn";
 import { useUserPreferencesStore } from "@/store/user-preferences";
 
 export function ThemeToggleDropdown() {
   const { theme, setTheme } = useUserPreferencesStore();
-  const id = useId();
-  const checked = theme === "light";
+  const { t } = useTranslation();
 
-  const handleThemeChange = (nextChecked: boolean) => {
-    setTheme(nextChecked ? "light" : "dark");
-  };
+  const options = [
+    {
+      value: "dark" as const,
+      label: t("settings:preferencesPage.themeDark"),
+      content: <MoonIcon aria-hidden="true" size={13} />,
+    },
+    {
+      value: "light" as const,
+      label: t("settings:preferencesPage.themeLight"),
+      content: <SunIcon aria-hidden="true" size={13} />,
+    },
+    {
+      value: "bp" as const,
+      label: t("settings:preferencesPage.themeBp"),
+      content: (
+        <span className="text-[11px] font-semibold leading-none">BP</span>
+      ),
+    },
+  ];
 
   return (
-    <div>
-      <div className="relative inline-grid h-7 grid-cols-[1fr_1fr] items-center font-medium text-sm">
-        <Switch
-          checked={checked}
-          className="peer absolute inset-0 h-[inherit] w-auto rounded-full bg-input/50 data-checked:bg-input/50 data-unchecked:bg-input/50 [&_[data-slot=switch-thumb]]:h-full [&_[data-slot=switch-thumb]]:w-1/2 [&_[data-slot=switch-thumb]]:rounded-full [&_[data-slot=switch-thumb]]:transition-transform [&_[data-slot=switch-thumb]]:duration-300 [&_[data-slot=switch-thumb]]:ease-out [&_[data-slot=switch-thumb]]:data-checked:translate-x-full [&_[data-slot=switch-thumb]]:rtl:data-checked:-translate-x-full"
-          id={id}
-          onCheckedChange={handleThemeChange}
-        />
-        <span className="pointer-events-none relative ms-0.5 flex min-w-7 items-center justify-center text-center peer-data-[state=checked]:text-muted-foreground/70">
-          <MoonIcon aria-hidden="true" size={13} />
-        </span>
-        <span className="pointer-events-none relative me-0.5 flex min-w-7 items-center justify-center text-center peer-data-[state=unchecked]:text-muted-foreground/70">
-          <SunIcon aria-hidden="true" size={13} />
-        </span>
-      </div>
-      <Label className="sr-only" htmlFor={id}>
-        Toggle theme
-      </Label>
+    <div
+      role="group"
+      aria-label={t("settings:preferencesPage.theme")}
+      className="inline-flex h-7 items-center rounded-full bg-input/50 p-0.5 font-medium text-sm"
+    >
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          aria-pressed={theme === option.value}
+          aria-label={option.label}
+          onClick={() => setTheme(option.value)}
+          className={cn(
+            "flex h-6 min-w-7 items-center justify-center rounded-full px-1 transition-colors duration-300 ease-out",
+            theme === option.value
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground/70 hover:text-foreground",
+          )}
+        >
+          {option.content}
+        </button>
+      ))}
     </div>
   );
 }

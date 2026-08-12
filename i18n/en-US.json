@@ -449,6 +449,7 @@
 			"themeLight": "Light",
 			"themeDark": "Dark",
 			"themeSystem": "System",
+			"themeBp": "BP",
 			"language": "Language",
 			"languageDescription": "Choose your preferred interface language",
 			"selectLanguage": "Select a language",

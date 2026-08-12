@@ -346,6 +346,7 @@
 			"themeLight": "Día",
 			"themeDark": "Noche",
 			"themeSystem": "Sistema",
+			"themeBp": "BP",
 			"language": "Idioma",
 			"languageDescription": "Elige el idioma de la interfaz",
 			"selectLanguage": "Seleccionar un idioma",

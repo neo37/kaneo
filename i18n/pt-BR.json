@@ -449,6 +449,7 @@
 			"themeLight": "Claro",
 			"themeDark": "Escuro",
 			"themeSystem": "Sistema",
+			"themeBp": "BP",
 			"language": "Idioma",
 			"languageDescription": "Escolha o idioma preferido da interface",
 			"selectLanguage": "Selecione um idioma",

@@ -9,9 +9,9 @@ export function isWeekStartDay(value: number): value is WeekStartDay {
 }
 
 type UserPreferencesStore = {
-  theme: "light" | "dark" | "system";
+  theme: "light" | "dark" | "system" | "bp";
   setTheme: (
-    theme: "light" | "dark" | "system",
+    theme: "light" | "dark" | "system" | "bp",
     coordinates?: { x: number; y: number },
   ) => void;
 
@@ -48,9 +48,9 @@ type UserPreferencesStore = {
 export const useUserPreferencesStore = create<UserPreferencesStore>()(
   persist(
     (set) => ({
-      theme: "dark",
+      theme: "bp",
       setTheme: (
-        theme: "light" | "dark" | "system",
+        theme: "light" | "dark" | "system" | "bp",
         coordinates?: { x: number; y: number },
       ) => {
         if (coordinates) {

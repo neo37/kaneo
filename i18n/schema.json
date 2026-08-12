@@ -1778,6 +1778,9 @@
 						"themeSystem": {
 							"type": "string"
 						},
+						"themeBp": {
+							"type": "string"
+						},
 						"language": {
 							"type": "string"
 						},
@@ -1880,6 +1883,7 @@
 						"themeLight",
 						"themeDark",
 						"themeSystem",
+						"themeBp",
 						"language",
 						"languageDescription",
 						"selectLanguage",
