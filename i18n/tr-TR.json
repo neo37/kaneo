@@ -1278,7 +1278,8 @@
 			"members": "Üyeler",
 			"invitations": "Davetler",
 			"more": "Daha fazla",
-			"backToBoard": "Panoya dön"
+			"backToBoard": "Panoya dön",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "Projeyi Görüntüle",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "sürükle: kaydır · ctrl/sağ sürükle: döndür · tekerlek: yakınlaştır",
 			"reset": "Sıfırla"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

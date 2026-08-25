@@ -1278,7 +1278,8 @@
 			"members": "Membres",
 			"invitations": "Invitations",
 			"more": "Plus",
-			"backToBoard": "Retour au tableau"
+			"backToBoard": "Retour au tableau",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "Voir le projet",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "glisser : déplacer · ctrl/glisser droit : pivoter · molette : zoom",
 			"reset": "Réinitialiser"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

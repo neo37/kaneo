@@ -1280,7 +1280,8 @@
 			"members": "Учасники",
 			"invitations": "Запрошення",
 			"more": "Більше",
-			"backToBoard": "Назад до дошки"
+			"backToBoard": "Назад до дошки",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "Переглянути проєкт",
@@ -1958,6 +1959,29 @@
 		"board3d": {
 			"hint": "перетягування: панорама · ctrl/праве перетягування: обертання · коліщатко: масштаб",
 			"reset": "Скинути"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

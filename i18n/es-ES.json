@@ -1278,7 +1278,8 @@
 			"members": "Miembros",
 			"invitations": "Invitaciones",
 			"more": "Más",
-			"backToBoard": "Volver al tablero"
+			"backToBoard": "Volver al tablero",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "Ver Proyecto",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "arrastrar: desplazar · ctrl/arrastre derecho: rotar · rueda: zoom",
 			"reset": "Restablecer"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

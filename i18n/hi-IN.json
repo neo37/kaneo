@@ -1278,7 +1278,8 @@
 			"members": "सदस्य",
 			"invitations": "निमंत्रण",
 			"more": "और",
-			"backToBoard": "बोर्ड पर वापस जाएँ"
+			"backToBoard": "बोर्ड पर वापस जाएँ",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "प्रोजेक्ट देखें",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "खींचें: पैन · ctrl/दायाँ-खींचें: घुमाएँ · व्हील: ज़ूम",
 			"reset": "रीसेट"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

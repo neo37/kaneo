@@ -1278,7 +1278,8 @@
 			"members": "Members",
 			"invitations": "Invitations",
 			"more": "More",
-			"backToBoard": "Back to board"
+			"backToBoard": "Back to board",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "View Project",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"reset": "Reset",
 			"hint": "drag: pan · ctrl/right-drag: rotate · wheel: zoom"
+		},
+		"spatial": {
+			"title": "Board space",
+			"boardsSelected": "Boards: {{count}}",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"loadingBoards": "Loading boards…",
+			"emptyTitle": "Pick boards to watch",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"agentsIdle": "no agents in sight",
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"camera": "Camera",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"task": "task",
+			"state": {
+				"thinking": "thinking",
+				"editing": "editing",
+				"running": "running",
+				"waiting": "waiting",
+				"review": "review",
+				"done": "done",
+				"failed": "failed"
+			}
 		}
 	},
 	"invitations": {

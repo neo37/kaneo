@@ -1278,7 +1278,8 @@
 			"members": "成员",
 			"invitations": "邀请",
 			"more": "更多",
-			"backToBoard": "返回看板"
+			"backToBoard": "返回看板",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "查看项目",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "拖动：平移 · Ctrl/右键拖动：旋转 · 滚轮：缩放",
 			"reset": "重置"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

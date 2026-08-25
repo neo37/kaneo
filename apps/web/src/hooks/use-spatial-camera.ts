@@ -19,8 +19,11 @@ export type Camera = {
 export const DEFAULT_PERSPECTIVE = 1200;
 
 type UseSpatialCameraOptions = {
-  /** Начальное положение. Вычисляется при монтировании и при сбросе. */
-  initial: () => Camera;
+  /**
+   * Начальное положение. Получает фактическую ширину области просмотра —
+   * она уже ширины окна на сайдбар и поля, а кадрировать надо по ней.
+   */
+  initial: (viewportWidth: number) => Camera;
   perspective?: number;
   /** Насколько далеко можно отъехать. Многодосочной сцене нужно дальше. */
   minZ?: number;
@@ -40,7 +43,10 @@ export function useSpatialCamera({
 }: UseSpatialCameraOptions): SpatialCamera {
   const viewportRef = useRef<HTMLDivElement>(null);
   const worldRef = useRef<HTMLDivElement>(null);
-  const cameraRef = useRef<Camera>(initial());
+  const measure = () =>
+    viewportRef.current?.clientWidth ||
+    (typeof window === "undefined" ? 1280 : window.innerWidth);
+  const cameraRef = useRef<Camera>(initial(measure()));
   const initialRef = useRef(initial);
   initialRef.current = initial;
 
@@ -56,8 +62,13 @@ export function useSpatialCamera({
     worldRef.current.style.transform = `translate3d(${-camera.x}px, ${-camera.y}px, ${camera.z}px) rotateX(${camera.rx}deg) rotateY(${camera.ry}deg)`;
   }, []);
 
+  // Пересоздаётся при каждом изменении initial: сцена меняет состав, и
+  // «сбросить камеру» должно означать новый кадр, а не старый.
   const resetCamera = useCallback(() => {
-    cameraRef.current = initialRef.current();
+    cameraRef.current = initialRef.current(
+      viewportRef.current?.clientWidth ||
+        (typeof window === "undefined" ? 1280 : window.innerWidth),
+    );
     applyCamera();
   }, [applyCamera]);
 

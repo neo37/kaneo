@@ -1,5 +1,5 @@
 import { RotateCcw } from "lucide-react";
-import { type ReactElement, useCallback, useMemo } from "react";
+import { type ReactElement, useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { type Camera, useSpatialCamera } from "@/hooks/use-spatial-camera";
 import { type TaskMove, useTaskMotion } from "@/hooks/use-task-motion";
@@ -95,11 +95,24 @@ function columnTransform(index: number, count: number) {
   return { x, z: -Math.abs(offset) * 30, ry: -offset * 4 };
 }
 
-function defaultCamera(): Camera {
+/**
+ * Отдаление, при котором сцена целиком попадает в кадр.
+ *
+ * Фиксированное значение не годится: одна доска оказывается неразличимо
+ * далеко, а шесть не помещаются. В CSS-3D объект на глубине z уменьшается в
+ * P/(P+|z|) раз, отсюда и обратная формула.
+ */
+function framingZ(sceneWidth: number, viewportWidth: number): number {
+  const target = Math.max(320, viewportWidth * 0.86);
+  const z = -PERSPECTIVE * Math.max(0, sceneWidth / target - 1);
+  return Math.min(-700, Math.max(-18000, z));
+}
+
+function defaultCamera(sceneWidth: number, viewportWidth: number): Camera {
   return {
     x: 0,
     y: 0,
-    z: window.innerWidth < 768 ? -3600 : -2400,
+    z: framingZ(sceneWidth, viewportWidth),
     rx: 14,
     ry: -14,
   };
@@ -111,11 +124,27 @@ function SpatialBoards({
   onOpenTask,
 }: SpatialBoardsProps): ReactElement {
   const { t } = useTranslation();
+  // Ширина сцены нужна и раскладке, и камере, поэтому считается один раз.
+  const sceneWidth = useMemo(() => {
+    if (boards.length === 0) return 0;
+    return (
+      boards.reduce((sum, b) => sum + boardWidth(b.columns.length), 0) +
+      (boards.length - 1) * BOARD_GAP
+    );
+  }, [boards]);
+
   const { viewportRef, worldRef, resetCamera, perspective } = useSpatialCamera({
-    initial: defaultCamera,
+    initial: (viewportWidth) => defaultCamera(sceneWidth, viewportWidth),
     perspective: PERSPECTIVE,
     minZ: -20000,
   });
+
+  // Кадр строится по ширине сцены, а она известна только после загрузки досок.
+  // Зависимость именно на ширину: при обычном обновлении задач она не меняется,
+  // и камеру, которую пользователь успел покрутить, никто не трогает.
+  useEffect(() => {
+    resetCamera();
+  }, [resetCamera, sceneWidth]);
 
   const moves = useTaskMotion(boards);
 
@@ -123,17 +152,14 @@ function SpatialBoards({
   // независимо от того, сколько досок выбрано.
   const layout = useMemo(() => {
     const widths = boards.map((b) => boardWidth(b.columns.length));
-    const total =
-      widths.reduce((sum, w) => sum + w, 0) +
-      Math.max(0, boards.length - 1) * BOARD_GAP;
-    let cursor = -total / 2;
+    let cursor = -sceneWidth / 2;
     return boards.map((boardItem, index) => {
       const width = widths[index] ?? COLUMN_WIDTH;
       const x = cursor + width / 2;
       cursor += width + BOARD_GAP;
       return { board: boardItem, x, width };
     });
-  }, [boards]);
+  }, [boards, sceneWidth]);
 
   const movesByProject = useMemo(() => {
     const grouped = new Map<string, TaskMove[]>();

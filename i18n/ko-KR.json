@@ -1278,7 +1278,8 @@
 			"members": "멤버",
 			"invitations": "초대",
 			"more": "더 보기",
-			"backToBoard": "보드로 돌아가기"
+			"backToBoard": "보드로 돌아가기",
+			"spatial": "Board space"
 		},
 		"projectList": {
 			"viewProject": "프로젝트 보기",
@@ -1946,6 +1947,29 @@
 		"board3d": {
 			"hint": "드래그: 이동 · Ctrl/우클릭 드래그: 회전 · 휠: 확대/축소",
 			"reset": "초기화"
+		},
+		"spatial": {
+			"agentsBusy": "{{busy}} of {{total}} agents working",
+			"agentsIdle": "no agents in sight",
+			"boardsSelected": "Boards: {{count}}",
+			"camera": "Camera",
+			"emptyHint": "This screen shows several boards in one space and the agents working on them, live.",
+			"emptyTitle": "Pick boards to watch",
+			"hint": "drag: pan · shift/right-drag: rotate · wheel: zoom",
+			"loadingBoards": "Loading boards…",
+			"loadingList": "Loading boards…",
+			"noBoards": "This workspace has no boards yet.",
+			"state": {
+				"done": "done",
+				"editing": "editing",
+				"failed": "failed",
+				"review": "review",
+				"running": "running",
+				"thinking": "thinking",
+				"waiting": "waiting"
+			},
+			"task": "task",
+			"title": "Board space"
 		}
 	},
 	"invitations": {

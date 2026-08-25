@@ -19,6 +19,7 @@ import {
 } from "hono-openapi";
 import * as v from "valibot";
 import activity from "./activity";
+import agentActivity from "./agent-activity";
 import { auth } from "./auth";
 import billing from "./billing";
 import column from "./column";
@@ -604,6 +605,7 @@ export function createApp() {
   const taskApi = api.route("/task", task);
   const columnApi = api.route("/column", column);
   const activityApi = api.route("/activity", activity);
+  const agentActivityApi = api.route("/agent-activity", agentActivity);
   const commentApi = api.route("/comment", comment);
   const timeEntryApi = api.route("/time-entry", timeEntry);
   const labelApi = api.route("/label", label);
@@ -777,6 +779,7 @@ export function createApp() {
     api,
     injectWebSocket,
     activityApi,
+    agentActivityApi,
     billingApi,
     columnApi,
     commentApi,
@@ -895,6 +898,7 @@ const {
   app,
   injectWebSocket,
   activityApi,
+  agentActivityApi,
   billingApi,
   columnApi,
   commentApi,
@@ -940,6 +944,7 @@ export type AppType =
   | typeof taskApi
   | typeof columnApi
   | typeof activityApi
+  | typeof agentActivityApi
   | typeof commentApi
   | typeof timeEntryApi
   | typeof labelApi
