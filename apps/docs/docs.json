@@ -65,7 +65,8 @@
 							"core/functional/account-notifications",
 							"core/functional/manage-your-account",
 							"core/functional/personalize-your-workspace",
-							"core/functional/manage-workspace-labels"
+							"core/functional/manage-workspace-labels",
+							"core/functional/board-space"
 						]
 					},
 					{
@@ -101,6 +102,7 @@
 							"core/integrations/discord",
 							"core/integrations/slack",
 							"core/integrations/telegram",
+							"core/integrations/agent-activity",
 							"core/integrations/outgoing-webhooks"
 						]
 					},

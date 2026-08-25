@@ -472,6 +472,7 @@
 			"themeLight": "Sáng",
 			"themeDark": "Tối",
 			"themeSystem": "Theo hệ thống",
+			"themeBp": "BP",
 			"language": "Ngôn ngữ",
 			"languageDescription": "Chọn ngôn ngữ giao diện ưa thích của bạn",
 			"selectLanguage": "Chọn một ngôn ngữ",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "Tổng quan",
 			"projects": "Dự án",
+			"boardSpace": "Không gian bảng",
 			"members": "Thành viên",
 			"invitations": "Lời mời",
 			"more": "Thêm",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "kéo: di chuyển · ctrl/kéo chuột phải: xoay · con lăn: thu phóng",
 			"reset": "Đặt lại"
+		},
+		"boardSpace": {
+			"title": "Không gian bảng",
+			"configure": "Bảng · {{count}}",
+			"pick": "Bảng cần theo dõi (tối đa {{max}})",
+			"clear": "Không hiển thị bảng nào",
+			"more": "+{{count}} nữa",
+			"live": "Trực tiếp · {{count}}",
+			"boardTasks": "công việc: {{count}}",
+			"boardLoading": "đang tải…",
+			"boardError": "không khả dụng",
+			"empty": {
+				"title": "Chưa chọn bảng nào",
+				"description": "Chọn các bảng bạn muốn theo dõi cạnh nhau — thẻ của chúng di chuyển ở đây theo thời gian thực."
+			}
+		},
+		"agents": {
+			"working": "Tác nhân đang làm việc · {{count}}",
+			"state": {
+				"started": "đã nhận",
+				"progress": "đang làm",
+				"blocked": "bị chặn",
+				"finished": "đã xong",
+				"failed": "thất bại"
+			}
 		}
 	},
 	"invitations": {

@@ -472,6 +472,7 @@
 			"themeLight": "लाइट",
 			"themeDark": "डार्क",
 			"themeSystem": "सिस्टम",
+			"themeBp": "BP",
 			"language": "भाषा",
 			"languageDescription": "अपनी पसंदीदा इंटरफ़ेस भाषा चुनें",
 			"selectLanguage": "भाषा चुनें",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "अवलोकन",
 			"projects": "प्रोजेक्ट",
+			"boardSpace": "बोर्ड स्पेस",
 			"members": "सदस्य",
 			"invitations": "निमंत्रण",
 			"more": "और",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "खींचें: पैन · ctrl/दायाँ-खींचें: घुमाएँ · व्हील: ज़ूम",
 			"reset": "रीसेट"
+		},
+		"boardSpace": {
+			"title": "बोर्ड स्पेस",
+			"configure": "बोर्ड · {{count}}",
+			"pick": "देखने के लिए बोर्ड (अधिकतम {{max}})",
+			"clear": "कोई नहीं दिखाएँ",
+			"more": "+{{count}} और",
+			"live": "लाइव · {{count}}",
+			"boardTasks": "कार्य: {{count}}",
+			"boardLoading": "लोड हो रहा है…",
+			"boardError": "उपलब्ध नहीं",
+			"empty": {
+				"title": "कोई बोर्ड नहीं चुना गया",
+				"description": "जिन बोर्डों को आप साथ-साथ देखना चाहते हैं उन्हें चुनें — उनके कार्ड यहाँ रीयल टाइम में चलेंगे।"
+			}
+		},
+		"agents": {
+			"working": "काम कर रहे एजेंट · {{count}}",
+			"state": {
+				"started": "लिया",
+				"progress": "काम कर रहा है",
+				"blocked": "अटका",
+				"finished": "पूरा",
+				"failed": "विफल"
+			}
 		}
 	},
 	"invitations": {

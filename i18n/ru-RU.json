@@ -472,6 +472,7 @@
 			"themeLight": "Светлая",
 			"themeDark": "Тёмная",
 			"themeSystem": "Системная",
+			"themeBp": "BP",
 			"language": "Язык",
 			"languageDescription": "Выберите предпочтительный язык интерфейса",
 			"selectLanguage": "Выберите язык",
@@ -1285,6 +1286,7 @@
 		"sidebar": {
 			"overview": "Обзор",
 			"projects": "Проекты",
+			"boardSpace": "Пространство досок",
 			"members": "Участники",
 			"invitations": "Приглашения",
 			"more": "Ещё",
@@ -2014,6 +2016,31 @@
 		"board3d": {
 			"reset": "Сброс",
 			"hint": "перетаскивание: панорама · ctrl/ПКМ: вращение · колесо: зум"
+		},
+		"boardSpace": {
+			"title": "Пространство досок",
+			"configure": "Доски · {{count}}",
+			"pick": "Какие доски показывать (до {{max}})",
+			"clear": "Не показывать ни одной",
+			"more": "ещё {{count}}",
+			"live": "В реальном времени · {{count}}",
+			"boardTasks": "задач: {{count}}",
+			"boardLoading": "загрузка…",
+			"boardError": "недоступна",
+			"empty": {
+				"title": "Доски не выбраны",
+				"description": "Выберите доски, за которыми хотите следить одновременно, — их карточки будут перемещаться здесь в реальном времени."
+			}
+		},
+		"agents": {
+			"working": "Агенты в работе · {{count}}",
+			"state": {
+				"started": "взял задачу",
+				"progress": "работает",
+				"blocked": "застрял",
+				"finished": "закончил",
+				"failed": "сорвался"
+			}
 		}
 	},
 	"invitations": {

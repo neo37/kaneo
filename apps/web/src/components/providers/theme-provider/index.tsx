@@ -6,7 +6,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("light", "dark");
+    root.classList.remove("light", "dark", "bp");
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
@@ -14,6 +14,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         ? "dark"
         : "light";
       root.classList.add(systemTheme);
+    } else if (theme === "bp") {
+      // BP — тёмная тема поверх dark, чтобы dark:-стили компонентов работали.
+      root.classList.add("dark", "bp");
     } else {
       root.classList.add(theme);
     }
@@ -21,7 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e: MediaQueryListEvent) => {
       if (theme === "system") {
-        root.classList.remove("light", "dark");
+        root.classList.remove("light", "dark", "bp");
         root.classList.add(e.matches ? "dark" : "light");
       }
     };

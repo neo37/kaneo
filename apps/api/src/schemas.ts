@@ -1,4 +1,5 @@
 import * as v from "valibot";
+import { AGENT_ACTIVITY_STATES } from "./agent-activity/constants";
 
 export const labelSchema = v.object({
   id: v.string(),
@@ -57,6 +58,7 @@ export const activitySchema = v.object({
     "title_changed",
     "description_changed",
     "create",
+    "agent_status",
   ] as const),
   createdAt: v.date(),
   userId: v.nullable(v.string()),
@@ -66,6 +68,22 @@ export const activitySchema = v.object({
   externalUserAvatar: v.nullable(v.string()),
   externalSource: v.nullable(v.string()),
   externalUrl: v.nullable(v.string()),
+});
+
+export const agentActivitySchema = v.object({
+  id: v.string(),
+  taskId: v.string(),
+  projectId: v.string(),
+  agent: v.string(),
+  agentId: v.nullable(v.string()),
+  agentKey: v.string(),
+  state: v.picklist(AGENT_ACTIVITY_STATES),
+  message: v.nullable(v.string()),
+  progress: v.nullable(v.number()),
+  avatarUrl: v.nullable(v.string()),
+  url: v.nullable(v.string()),
+  createdAt: v.date(),
+  updatedAt: v.date(),
 });
 
 export const timeEntrySchema = v.object({

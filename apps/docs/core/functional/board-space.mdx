@@ -1,0 +1,43 @@
+---
+title: Watch Several Boards at Once in the Board Space
+description: Put up to six boards in one 3D scene and watch cards move between columns in real time
+---
+
+The board space is for watching work rather than doing it: several boards side by side, in one scene, updating as they change. It is most useful when work crosses projects — a task leaving one board and appearing on another is otherwise two separate screens.
+
+## Open it
+
+1. Open a workspace.
+2. Go to **Board space** in the workspace navigation, or open `/dashboard/workspace/<workspace id>/space` directly.
+
+The first time, the first few projects of the workspace are shown so the screen is not empty.
+
+## Choose the boards
+
+Use **Boards** in the header to pick which projects to watch. The choice is remembered per workspace, in your browser — it is your view, not a setting shared with the team.
+
+Six boards is the limit. Every board multiplies the cards the scene has to draw, and for the same reason each column shows its first eight cards and counts the rest.
+
+## Move around
+
+| Action | Result |
+| --- | --- |
+| Drag | Pan the camera |
+| Right-drag, or Ctrl / Shift and drag | Orbit |
+| Wheel | Zoom |
+| Board name in the top-left | Fly to that board |
+| **Reset** | Back to the starting view |
+
+Boards stand in an arc around the camera: the middle one is close and readable, the others turn away. That is what makes several boards fit without shrinking the cards into specks.
+
+## What movement looks like
+
+When a card changes column — someone dragged it, an agent moved it through the API, or a refetch brought the change in — a copy of the card flies across the screen and lands where the card now is, and the card pulses once.
+
+The animation is driven by what the screen sees, so it works the same regardless of who moved the card.
+
+## Agents on the cards
+
+If external agents report their work through the [agent connector](/core/integrations/agent-activity), their state shows as a badge on the card they are working on, and a roster of the working agents appears in the corner of the scene.
+
+Colour carries the state: running, blocked, failed, done. An agent that has been silent for five minutes is dimmed and no longer counted as working — a crashed agent should not look busy.

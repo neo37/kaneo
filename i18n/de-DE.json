@@ -472,6 +472,7 @@
 			"themeLight": "Hell",
 			"themeDark": "Dunkel",
 			"themeSystem": "System",
+			"themeBp": "BP",
 			"language": "Sprache",
 			"languageDescription": "Wähle deine bevorzugte Oberflächensprache",
 			"selectLanguage": "Sprache auswählen",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "Übersicht",
 			"projects": "Projekte",
+			"boardSpace": "Board-Raum",
 			"members": "Mitglieder",
 			"invitations": "Einladungen",
 			"more": "Mehr",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "Ziehen: Verschieben · Strg/Rechtsklick-Ziehen: Drehen · Mausrad: Zoom",
 			"reset": "Zurücksetzen"
+		},
+		"boardSpace": {
+			"title": "Board-Raum",
+			"configure": "Boards · {{count}}",
+			"pick": "Boards zum Beobachten (bis zu {{max}})",
+			"clear": "Keine anzeigen",
+			"more": "+{{count}} weitere",
+			"live": "Live · {{count}}",
+			"boardTasks": "Aufgaben: {{count}}",
+			"boardLoading": "lädt…",
+			"boardError": "nicht verfügbar",
+			"empty": {
+				"title": "Keine Boards ausgewählt",
+				"description": "Wähle die Boards, die du nebeneinander beobachten möchtest — ihre Karten bewegen sich hier in Echtzeit."
+			}
+		},
+		"agents": {
+			"working": "Agenten im Einsatz · {{count}}",
+			"state": {
+				"started": "übernommen",
+				"progress": "arbeitet",
+				"blocked": "blockiert",
+				"finished": "fertig",
+				"failed": "fehlgeschlagen"
+			}
 		}
 	},
 	"invitations": {

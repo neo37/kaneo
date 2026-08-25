@@ -472,6 +472,7 @@
 			"themeLight": "라이트",
 			"themeDark": "다크",
 			"themeSystem": "시스템",
+			"themeBp": "BP",
 			"language": "언어",
 			"languageDescription": "선호하는 인터페이스 언어를 선택합니다",
 			"selectLanguage": "언어 선택",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "개요",
 			"projects": "프로젝트",
+			"boardSpace": "보드 공간",
 			"members": "멤버",
 			"invitations": "초대",
 			"more": "더 보기",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "드래그: 이동 · Ctrl/우클릭 드래그: 회전 · 휠: 확대/축소",
 			"reset": "초기화"
+		},
+		"boardSpace": {
+			"title": "보드 공간",
+			"configure": "보드 · {{count}}",
+			"pick": "지켜볼 보드 (최대 {{max}}개)",
+			"clear": "모두 표시 안 함",
+			"more": "{{count}}개 더",
+			"live": "실시간 · {{count}}",
+			"boardTasks": "작업: {{count}}",
+			"boardLoading": "불러오는 중…",
+			"boardError": "사용할 수 없음",
+			"empty": {
+				"title": "선택된 보드가 없습니다",
+				"description": "나란히 지켜볼 보드를 고르세요. 카드가 여기에서 실시간으로 움직입니다."
+			}
+		},
+		"agents": {
+			"working": "작업 중인 에이전트 · {{count}}",
+			"state": {
+				"started": "맡음",
+				"progress": "작업 중",
+				"blocked": "막힘",
+				"finished": "완료",
+				"failed": "실패"
+			}
 		}
 	},
 	"invitations": {

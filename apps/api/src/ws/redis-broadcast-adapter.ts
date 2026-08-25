@@ -1,7 +1,11 @@
 import type Redis from "ioredis";
 import * as v from "valibot";
 import { closeRedis, getRedisPub, getRedisSub } from "../redis";
-import type { BroadcastAdapter, BroadcastMessage } from "./broadcast-adapter";
+import {
+  agentActivityBroadcastSchema,
+  type BroadcastAdapter,
+  type BroadcastMessage,
+} from "./broadcast-adapter";
 
 const CHANNEL_PREFIX = "kaneo:ws:";
 const CHANNEL_SUFFIX = ":broadcast";
@@ -15,6 +19,9 @@ const broadcastMessageSchema = v.object({
     taskId: v.optional(v.string()),
     sourceTaskId: v.optional(v.string()),
     targetTaskId: v.optional(v.string()),
+    // Without this entry valibot would strip the payload and AGENT_ACTIVITY
+    // would arrive empty on every instance but the publisher.
+    agentActivity: v.optional(agentActivityBroadcastSchema),
   }),
   excludeInitiatorId: v.optional(v.string()),
 });

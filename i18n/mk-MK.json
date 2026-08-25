@@ -472,6 +472,7 @@
 			"themeLight": "Светла",
 			"themeDark": "Темна",
 			"themeSystem": "Системска",
+			"themeBp": "BP",
 			"language": "Јазик",
 			"languageDescription": "Избери го претпочитаниот јазик на интерфејсот",
 			"selectLanguage": "Избери јазик",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "Преглед",
 			"projects": "Проекти",
+			"boardSpace": "Простор на табли",
 			"members": "Членови",
 			"invitations": "Покани",
 			"more": "Повеќе",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "влечење: поместување · ctrl/десно влечење: ротација · тркалце: зум",
 			"reset": "Ресетирај"
+		},
+		"boardSpace": {
+			"title": "Простор на табли",
+			"configure": "Табли · {{count}}",
+			"pick": "Табли за следење (најмногу {{max}})",
+			"clear": "Не прикажувај ниту една",
+			"more": "+{{count}} повеќе",
+			"live": "Во живо · {{count}}",
+			"boardTasks": "задачи: {{count}}",
+			"boardLoading": "се вчитува…",
+			"boardError": "недостапна",
+			"empty": {
+				"title": "Не се избрани табли",
+				"description": "Изберете ги таблите што сакате да ги следите една до друга — нивните картички се движат овде во реално време."
+			}
+		},
+		"agents": {
+			"working": "Агенти во работа · {{count}}",
+			"state": {
+				"started": "презеде",
+				"progress": "работи",
+				"blocked": "блокиран",
+				"finished": "заврши",
+				"failed": "не успеа"
+			}
 		}
 	},
 	"invitations": {

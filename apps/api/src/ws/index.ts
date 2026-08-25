@@ -1,4 +1,8 @@
 import type { WSContext } from "hono/ws";
+import {
+  AGENT_ACTIVITY_MESSAGE_TYPE,
+  type AgentActivityState,
+} from "../agent-activity/constants";
 import { subscribeToEvent } from "../events";
 import { isRedisConfigured } from "../redis";
 import type {
@@ -193,7 +197,12 @@ export function broadcastToProject(
     projectBroadcastQueues.set(projectId, new Map());
   }
 
-  const messageKey = `${message.type}:${message.taskId ?? ""}:${message.sourceTaskId ?? ""}:${message.targetTaskId ?? ""}`;
+  // The agent key is part of the dedupe identity: repeated ticks from one agent
+  // on one task collapse to the latest state inside the 100ms window (that is
+  // the point — a capsule reporting every few seconds must not flood sockets),
+  // while two agents working the same task stay separate messages. It is empty
+  // for every other message type, so existing dedupe behaviour is unchanged.
+  const messageKey = `${message.type}:${message.taskId ?? ""}:${message.sourceTaskId ?? ""}:${message.targetTaskId ?? ""}:${message.agentActivity?.agentKey ?? ""}`;
   projectBroadcastQueues
     .get(projectId)
     ?.set(messageKey, { message, excludeInitiatorId });
@@ -307,6 +316,51 @@ subscribeToEvent<{
     },
     initiatorId,
   );
+});
+
+subscribeToEvent<{
+  activityId: string;
+  taskId: string;
+  projectId: string;
+  agent: string;
+  agentId: string | null;
+  agentKey: string;
+  state: AgentActivityState;
+  message: string | null;
+  progress: number | null;
+  avatarUrl: string | null;
+  url: string | null;
+  updatedAt: string;
+  initiatorId?: string;
+}>("agent-activity.updated", async (data) => {
+  const { projectId, taskId } = data;
+  if (!projectId || !taskId) return;
+
+  // Deliberately no excludeInitiatorId. Elsewhere the initiator is skipped
+  // because it already applied the change locally and only needs others told.
+  // Here the initiator is the agent's API key, which owns no browser tab, while
+  // the screens that must render the badge are pure observers — excluding the
+  // initiator would drop the message for every socket of the API key's owner
+  // that connected without a windowId. Every watcher gets every tick.
+  broadcastToProject(projectId, {
+    type: AGENT_ACTIVITY_MESSAGE_TYPE,
+    projectId,
+    taskId,
+    agentActivity: {
+      activityId: data.activityId,
+      taskId,
+      projectId,
+      agent: data.agent,
+      agentId: data.agentId ?? null,
+      agentKey: data.agentKey,
+      state: data.state,
+      message: data.message ?? null,
+      progress: data.progress ?? null,
+      avatarUrl: data.avatarUrl ?? null,
+      url: data.url ?? null,
+      updatedAt: data.updatedAt,
+    },
+  });
 });
 
 subscribeToEvent<{ notificationId: string; userId: string }>(

@@ -472,6 +472,7 @@
 			"themeLight": "Світла",
 			"themeDark": "Темна",
 			"themeSystem": "Системна",
+			"themeBp": "BP",
 			"language": "Мова",
 			"languageDescription": "Оберіть бажану мову інтерфейсу",
 			"selectLanguage": "Обрати мову",
@@ -1277,6 +1278,7 @@
 		"sidebar": {
 			"overview": "Огляд",
 			"projects": "Проєкти",
+			"boardSpace": "Простір дощок",
 			"members": "Учасники",
 			"invitations": "Запрошення",
 			"more": "Більше",
@@ -1958,6 +1960,31 @@
 		"board3d": {
 			"hint": "перетягування: панорама · ctrl/праве перетягування: обертання · коліщатко: масштаб",
 			"reset": "Скинути"
+		},
+		"boardSpace": {
+			"title": "Простір дощок",
+			"configure": "Дошки · {{count}}",
+			"pick": "Які дошки показувати (до {{max}})",
+			"clear": "Не показувати жодної",
+			"more": "ще {{count}}",
+			"live": "У реальному часі · {{count}}",
+			"boardTasks": "завдань: {{count}}",
+			"boardLoading": "завантаження…",
+			"boardError": "недоступна",
+			"empty": {
+				"title": "Дошки не вибрані",
+				"description": "Виберіть дошки, за якими хочете стежити одночасно, — їхні картки рухатимуться тут у реальному часі."
+			}
+		},
+		"agents": {
+			"working": "Агенти в роботі · {{count}}",
+			"state": {
+				"started": "узяв завдання",
+				"progress": "працює",
+				"blocked": "застряг",
+				"finished": "завершив",
+				"failed": "зірвався"
+			}
 		}
 	},
 	"invitations": {

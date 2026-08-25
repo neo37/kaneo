@@ -369,6 +369,7 @@
 			"themeLight": "Día",
 			"themeDark": "Noche",
 			"themeSystem": "Sistema",
+			"themeBp": "BP",
 			"language": "Idioma",
 			"languageDescription": "Elige el idioma de la interfaz",
 			"selectLanguage": "Seleccionar un idioma",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "Vista general",
 			"projects": "Proyectos",
+			"boardSpace": "Espacio de tableros",
 			"members": "Miembros",
 			"invitations": "Invitaciones",
 			"more": "Más",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"hint": "arrastrar: desplazar · ctrl/arrastre derecho: rotar · rueda: zoom",
 			"reset": "Restablecer"
+		},
+		"boardSpace": {
+			"title": "Espacio de tableros",
+			"configure": "Tableros · {{count}}",
+			"pick": "Tableros a seguir (hasta {{max}})",
+			"clear": "No mostrar ninguno",
+			"more": "+{{count}} más",
+			"live": "En vivo · {{count}}",
+			"boardTasks": "tareas: {{count}}",
+			"boardLoading": "cargando…",
+			"boardError": "no disponible",
+			"empty": {
+				"title": "Ningún tablero seleccionado",
+				"description": "Elige los tableros que quieres seguir a la vez: sus tarjetas se mueven aquí en tiempo real."
+			}
+		},
+		"agents": {
+			"working": "Agentes trabajando · {{count}}",
+			"state": {
+				"started": "tomada",
+				"progress": "trabajando",
+				"blocked": "bloqueado",
+				"finished": "terminado",
+				"failed": "fallido"
+			}
 		}
 	},
 	"invitations": {

@@ -472,6 +472,7 @@
 			"themeLight": "Light",
 			"themeDark": "Dark",
 			"themeSystem": "System",
+			"themeBp": "BP",
 			"language": "Language",
 			"languageDescription": "Choose your preferred interface language",
 			"selectLanguage": "Select a language",
@@ -1275,6 +1276,7 @@
 		"sidebar": {
 			"overview": "Overview",
 			"projects": "Projects",
+			"boardSpace": "Board space",
 			"members": "Members",
 			"invitations": "Invitations",
 			"more": "More",
@@ -1946,6 +1948,31 @@
 		"board3d": {
 			"reset": "Reset",
 			"hint": "drag: pan · ctrl/right-drag: rotate · wheel: zoom"
+		},
+		"boardSpace": {
+			"title": "Board space",
+			"configure": "Boards · {{count}}",
+			"pick": "Boards to watch (up to {{max}})",
+			"clear": "Show none",
+			"more": "+{{count}} more",
+			"live": "Live · {{count}}",
+			"boardTasks": "tasks: {{count}}",
+			"boardLoading": "loading…",
+			"boardError": "unavailable",
+			"empty": {
+				"title": "No boards selected",
+				"description": "Pick the boards you want to watch side by side — their cards move here in real time."
+			}
+		},
+		"agents": {
+			"working": "Agents at work · {{count}}",
+			"state": {
+				"started": "picked up",
+				"progress": "working",
+				"blocked": "blocked",
+				"finished": "done",
+				"failed": "failed"
+			}
 		}
 	},
 	"invitations": {
