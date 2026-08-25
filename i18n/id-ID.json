@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "seret: geser · ctrl/seret kanan: putar · roda: zoom",
 			"reset": "Atur ulang"
+		},
+		"boardSpace": {
+			"title": "Ruang papan",
+			"configure": "Papan · {{count}}",
+			"pick": "Papan yang dipantau (maks {{max}})",
+			"clear": "Jangan tampilkan apa pun",
+			"more": "+{{count}} lagi",
+			"live": "Langsung · {{count}}",
+			"boardTasks": "tugas: {{count}}",
+			"boardLoading": "memuat…",
+			"boardError": "tidak tersedia",
+			"empty": {
+				"title": "Belum ada papan dipilih",
+				"description": "Pilih papan yang ingin Anda pantau berdampingan — kartunya bergerak di sini secara langsung."
+			}
 		}
 	},
 	"invitations": {

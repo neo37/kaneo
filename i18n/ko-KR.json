@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "드래그: 이동 · Ctrl/우클릭 드래그: 회전 · 휠: 확대/축소",
 			"reset": "초기화"
+		},
+		"boardSpace": {
+			"title": "보드 공간",
+			"configure": "보드 · {{count}}",
+			"pick": "지켜볼 보드 (최대 {{max}}개)",
+			"clear": "모두 표시 안 함",
+			"more": "{{count}}개 더",
+			"live": "실시간 · {{count}}",
+			"boardTasks": "작업: {{count}}",
+			"boardLoading": "불러오는 중…",
+			"boardError": "사용할 수 없음",
+			"empty": {
+				"title": "선택된 보드가 없습니다",
+				"description": "나란히 지켜볼 보드를 고르세요. 카드가 여기에서 실시간으로 움직입니다."
+			}
 		}
 	},
 	"invitations": {

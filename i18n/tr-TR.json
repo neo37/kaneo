@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "sürükle: kaydır · ctrl/sağ sürükle: döndür · tekerlek: yakınlaştır",
 			"reset": "Sıfırla"
+		},
+		"boardSpace": {
+			"title": "Pano alanı",
+			"configure": "Panolar · {{count}}",
+			"pick": "İzlenecek panolar (en fazla {{max}})",
+			"clear": "Hiçbirini gösterme",
+			"more": "+{{count}} daha",
+			"live": "Canlı · {{count}}",
+			"boardTasks": "görev: {{count}}",
+			"boardLoading": "yükleniyor…",
+			"boardError": "kullanılamıyor",
+			"empty": {
+				"title": "Pano seçilmedi",
+				"description": "Yan yana izlemek istediğiniz panoları seçin — kartları burada gerçek zamanlı olarak hareket eder."
+			}
 		}
 	},
 	"invitations": {

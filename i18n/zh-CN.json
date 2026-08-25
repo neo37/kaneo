@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "拖动：平移 · Ctrl/右键拖动：旋转 · 滚轮：缩放",
 			"reset": "重置"
+		},
+		"boardSpace": {
+			"title": "看板空间",
+			"configure": "看板 · {{count}}",
+			"pick": "要关注的看板（最多 {{max}} 个）",
+			"clear": "全部不显示",
+			"more": "还有 {{count}} 个",
+			"live": "实时 · {{count}}",
+			"boardTasks": "任务：{{count}}",
+			"boardLoading": "加载中…",
+			"boardError": "不可用",
+			"empty": {
+				"title": "尚未选择看板",
+				"description": "选择你想并排关注的看板，它们的卡片会在这里实时移动。"
+			}
 		}
 	},
 	"invitations": {

@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "trascina: sposta · ctrl/trascina destro: ruota · rotellina: zoom",
 			"reset": "Reimposta"
+		},
+		"boardSpace": {
+			"title": "Spazio delle bacheche",
+			"configure": "Bacheche · {{count}}",
+			"pick": "Bacheche da seguire (fino a {{max}})",
+			"clear": "Non mostrarne nessuna",
+			"more": "+{{count}} altre",
+			"live": "In diretta · {{count}}",
+			"boardTasks": "attività: {{count}}",
+			"boardLoading": "caricamento…",
+			"boardError": "non disponibile",
+			"empty": {
+				"title": "Nessuna bacheca selezionata",
+				"description": "Scegli le bacheche da seguire affiancate: le loro schede si muovono qui in tempo reale."
+			}
 		}
 	},
 	"invitations": {

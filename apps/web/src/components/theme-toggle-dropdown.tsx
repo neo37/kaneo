@@ -28,10 +28,12 @@ export function ThemeToggleDropdown() {
   ];
 
   return (
-    <div
-      role="group"
+    // fieldset, а не div с role="group": та же семантика группы полей, но
+    // родная, а не приписанная ролью. Сброс border/margin/min-width убирает
+    // собственную отрисовку fieldset, чтобы переключатель выглядел прежним.
+    <fieldset
       aria-label={t("settings:preferencesPage.theme")}
-      className="inline-flex h-7 items-center rounded-full bg-input/50 p-0.5 font-medium text-sm"
+      className="m-0 inline-flex h-7 min-w-0 items-center rounded-full border-0 bg-input/50 p-0.5 font-medium text-sm"
     >
       {options.map((option) => (
         <button
@@ -52,6 +54,6 @@ export function ThemeToggleDropdown() {
           {option.content}
         </button>
       ))}
-    </div>
+    </fieldset>
   );
 }

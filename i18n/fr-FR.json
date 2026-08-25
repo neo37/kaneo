@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "glisser : déplacer · ctrl/glisser droit : pivoter · molette : zoom",
 			"reset": "Réinitialiser"
+		},
+		"boardSpace": {
+			"title": "Espace des tableaux",
+			"configure": "Tableaux · {{count}}",
+			"pick": "Tableaux à suivre (jusqu’à {{max}})",
+			"clear": "N’en afficher aucun",
+			"more": "+{{count}} autres",
+			"live": "En direct · {{count}}",
+			"boardTasks": "tâches : {{count}}",
+			"boardLoading": "chargement…",
+			"boardError": "indisponible",
+			"empty": {
+				"title": "Aucun tableau sélectionné",
+				"description": "Choisissez les tableaux à suivre côte à côte — leurs cartes se déplacent ici en temps réel."
+			}
 		}
 	},
 	"invitations": {

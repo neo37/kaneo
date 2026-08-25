@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"reset": "Reset",
 			"hint": "drag: pan · ctrl/right-drag: rotate · wheel: zoom"
+		},
+		"boardSpace": {
+			"title": "Board space",
+			"configure": "Boards · {{count}}",
+			"pick": "Boards to watch (up to {{max}})",
+			"clear": "Show none",
+			"more": "+{{count}} more",
+			"live": "Live · {{count}}",
+			"boardTasks": "tasks: {{count}}",
+			"boardLoading": "loading…",
+			"boardError": "unavailable",
+			"empty": {
+				"title": "No boards selected",
+				"description": "Pick the boards you want to watch side by side — their cards move here in real time."
+			}
 		}
 	},
 	"invitations": {

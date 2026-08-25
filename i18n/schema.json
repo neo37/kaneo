@@ -7585,6 +7585,64 @@
 						}
 					},
 					"required": ["reset", "hint"]
+				},
+				"boardSpace": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"title": {
+							"type": "string"
+						},
+						"configure": {
+							"type": "string"
+						},
+						"pick": {
+							"type": "string"
+						},
+						"clear": {
+							"type": "string"
+						},
+						"more": {
+							"type": "string"
+						},
+						"live": {
+							"type": "string"
+						},
+						"boardTasks": {
+							"type": "string"
+						},
+						"boardLoading": {
+							"type": "string"
+						},
+						"boardError": {
+							"type": "string"
+						},
+						"empty": {
+							"type": "object",
+							"additionalProperties": false,
+							"properties": {
+								"title": {
+									"type": "string"
+								},
+								"description": {
+									"type": "string"
+								}
+							},
+							"required": ["title", "description"]
+						}
+					},
+					"required": [
+						"title",
+						"configure",
+						"pick",
+						"clear",
+						"more",
+						"live",
+						"boardTasks",
+						"boardLoading",
+						"boardError",
+						"empty"
+					]
 				}
 			},
 			"required": [
@@ -7617,7 +7675,8 @@
 				"actions",
 				"bulk",
 				"editor",
-				"board3d"
+				"board3d",
+				"boardSpace"
 			]
 		},
 		"invitations": {

@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "arrastrar: desplazar · ctrl/arrastre derecho: rotar · rueda: zoom",
 			"reset": "Restablecer"
+		},
+		"boardSpace": {
+			"title": "Espacio de tableros",
+			"configure": "Tableros · {{count}}",
+			"pick": "Tableros a seguir (hasta {{max}})",
+			"clear": "No mostrar ninguno",
+			"more": "+{{count}} más",
+			"live": "En vivo · {{count}}",
+			"boardTasks": "tareas: {{count}}",
+			"boardLoading": "cargando…",
+			"boardError": "no disponible",
+			"empty": {
+				"title": "Ningún tablero seleccionado",
+				"description": "Elige los tableros que quieres seguir a la vez: sus tarjetas se mueven aquí en tiempo real."
+			}
 		}
 	},
 	"invitations": {

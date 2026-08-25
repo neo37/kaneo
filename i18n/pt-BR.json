@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "arrastar: mover · ctrl/arrastar direito: girar · roda: zoom",
 			"reset": "Redefinir"
+		},
+		"boardSpace": {
+			"title": "Espaço de quadros",
+			"configure": "Quadros · {{count}}",
+			"pick": "Quadros a acompanhar (até {{max}})",
+			"clear": "Não mostrar nenhum",
+			"more": "+{{count}} outros",
+			"live": "Ao vivo · {{count}}",
+			"boardTasks": "tarefas: {{count}}",
+			"boardLoading": "carregando…",
+			"boardError": "indisponível",
+			"empty": {
+				"title": "Nenhum quadro selecionado",
+				"description": "Escolha os quadros que quer acompanhar lado a lado — seus cartões se movem aqui em tempo real."
+			}
 		}
 	},
 	"invitations": {

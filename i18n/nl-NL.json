@@ -1924,6 +1924,21 @@
 		"board3d": {
 			"hint": "slepen: verschuiven · ctrl/rechts slepen: draaien · scrollwiel: zoomen",
 			"reset": "Opnieuw instellen"
+		},
+		"boardSpace": {
+			"title": "Bordenruimte",
+			"configure": "Borden · {{count}}",
+			"pick": "Borden om te volgen (max. {{max}})",
+			"clear": "Geen tonen",
+			"more": "+{{count}} meer",
+			"live": "Live · {{count}}",
+			"boardTasks": "taken: {{count}}",
+			"boardLoading": "laden…",
+			"boardError": "niet beschikbaar",
+			"empty": {
+				"title": "Geen borden geselecteerd",
+				"description": "Kies de borden die je naast elkaar wilt volgen — hun kaarten bewegen hier in realtime."
+			}
 		}
 	},
 	"invitations": {
