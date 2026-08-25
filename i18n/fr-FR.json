@@ -1253,6 +1253,7 @@
 		"sidebar": {
 			"overview": "Vue d'ensemble",
 			"projects": "Projets",
+			"boardSpace": "Espace des tableaux",
 			"members": "Membres",
 			"invitations": "Invitations",
 			"more": "Plus",

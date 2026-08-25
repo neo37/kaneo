@@ -4967,6 +4967,9 @@
 						"projects": {
 							"type": "string"
 						},
+						"boardSpace": {
+							"type": "string"
+						},
 						"members": {
 							"type": "string"
 						},
@@ -4983,6 +4986,7 @@
 					"required": [
 						"overview",
 						"projects",
+						"boardSpace",
 						"members",
 						"invitations",
 						"more",

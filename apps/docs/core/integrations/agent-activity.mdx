@@ -1,0 +1,68 @@
+---
+title: Agent activity
+description: Let external agents report what they are doing on a task, so their work shows up on the board in real time.
+---
+
+An external agent — a CI job, a script, an AI coding agent running on its own machine — can tell Kaneo what it is doing on a task. The state appears on the task card, in the task activity feed, and on the [board space](/core/functional/board-space), where several boards are watched at once.
+
+Without this, a task looks identical whether an agent is halfway through it, blocked on a question, or crashed an hour ago.
+
+<Info>
+This is an incoming integration: agents post to Kaneo. It is unrelated to [outgoing webhooks](/core/integrations/outgoing-webhooks), which post from Kaneo to other systems.
+</Info>
+
+## Getting a key
+
+An agent authenticates with an API key, not a session.
+
+1. Open **Settings → Account → Developer**.
+2. Create an API key and store it where the agent can read it.
+
+The key inherits the permissions of the person who created it. Reporting activity requires permission to update tasks in that workspace, the same permission a comment requires.
+
+## Reporting a state
+
+```bash
+curl -X POST https://kaneo.example.com/api/agent-activity \
+  -H "x-api-key: $KANEO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "taskId": "yq8k2m4n6p8r0t2v4x6z8b0d",
+    "agent": "capsule s03 · reviewer",
+    "agentId": "capsule-s03",
+    "state": "progress",
+    "message": "Running the test suite",
+    "progress": 60,
+    "url": "https://capsules.example.com/s03/live"
+  }'
+```
+
+| Field | Required | Meaning |
+| --- | --- | --- |
+| `taskId` | yes | Task the agent is working on |
+| `agent` | yes | Display name, shown on the card |
+| `agentId` | no | Stable identity of the agent; see below |
+| `state` | yes | `started`, `progress`, `blocked`, `finished` or `failed` |
+| `message` | no | One line about what is happening right now |
+| `progress` | no | 0–100 |
+| `url` | no | Link to the agent's live session or log |
+| `avatarUrl` | no | Picture for the agent |
+
+Responses: `400` invalid payload, `401` missing or invalid key, `403` no access to the task's workspace, `404` no such task.
+
+## Ticking while you work
+
+Send a state whenever it changes, and periodically while the work continues — that is what keeps the board honest. Ticks do not pile up: all ticks from one agent on one task update a single row, keeping the time of the first tick and moving the time of the last.
+
+**Pass `agentId`.** It is the identity ticks are merged on. Without it the identity falls back to the display name, so two agents whose names differ only in punctuation share one lane. If you want each run to appear separately, put the run id in `agentId`.
+
+An agent that stops ticking is not forgotten: after five minutes of silence the board dims it and stops counting it as working, which is how a crashed agent is told apart from a busy one.
+
+## Reading the state back
+
+```bash
+curl https://kaneo.example.com/api/agent-activity/$PROJECT_ID \
+  -H "x-api-key: $KANEO_API_KEY"
+```
+
+Returns the current state of every agent lane in the project, newest first. The web app uses this to fill a board when it opens; live changes arrive over the project websocket as `AGENT_ACTIVITY` messages carrying the same shape.

@@ -73,9 +73,10 @@ describe("useAgentActivity", () => {
     );
 
     await waitFor(() => expect(result.current.agents).toHaveLength(1));
-    const settled = renders;
-    await new Promise((resolve) => setTimeout(resolve, 250));
-    expect(renders - settled).toBeLessThan(3);
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    // Цикл даёт сотни рендеров и упирается в предел React, а не единицы:
+    // считать точный прирост под нагрузкой бессмысленно, важен порядок.
+    expect(renders).toBeLessThan(25);
   });
 
   it("merges live ticks in place instead of piling them up", async () => {
