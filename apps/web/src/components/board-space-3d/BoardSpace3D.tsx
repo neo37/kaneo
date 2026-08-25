@@ -1,6 +1,7 @@
-import { Radio, RotateCcw } from "lucide-react";
+import { Bot, Radio, RotateCcw } from "lucide-react";
 import { type ReactElement, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import type { AgentPresence } from "@/hooks/use-agent-activity";
 import {
   type Camera,
   PERSPECTIVE,
@@ -8,6 +9,7 @@ import {
 } from "@/hooks/use-board-camera";
 import { getPriorityIcon } from "@/lib/priority";
 import type { ProjectWithTasks } from "@/types/project";
+import AgentMarkers, { STATE_STYLES } from "./agent-markers";
 import { useTaskFlights } from "./use-task-flights";
 
 export type BoardSpaceBoard = {
@@ -20,6 +22,10 @@ export type BoardSpaceBoard = {
 
 type BoardSpace3DProps = {
   boards: BoardSpaceBoard[];
+  /** What external agents are doing, keyed by the task they work on. */
+  agentsByTask?: Map<string, AgentPresence[]>;
+  /** Agents currently at work, for the roster in the corner. */
+  workingAgents?: AgentPresence[];
   onOpenTask?: (projectId: string, taskId: string) => void;
 };
 
@@ -72,7 +78,14 @@ function placeBoards(boards: BoardSpaceBoard[]): {
   return { placed, totalWidth, widestBoard: Math.max(...widths, 0) };
 }
 
-function BoardSpace3D({ boards, onOpenTask }: BoardSpace3DProps): ReactElement {
+const ROSTER_LIMIT = 6;
+
+function BoardSpace3D({
+  boards,
+  agentsByTask,
+  workingAgents,
+  onOpenTask,
+}: BoardSpace3DProps): ReactElement {
   const { t } = useTranslation();
 
   const { placed, widestBoard } = useMemo(() => placeBoards(boards), [boards]);
@@ -123,6 +136,21 @@ function BoardSpace3D({ boards, onOpenTask }: BoardSpace3DProps): ReactElement {
     (x: number) => flyTo({ x, y: 0, z: -1600, ry: 0 }),
     [flyTo],
   );
+
+  const taskIndex = useMemo(() => {
+    const index = new Map<string, { title: string; board: string }>();
+    for (const board of boards) {
+      for (const column of board.project?.columns ?? []) {
+        for (const task of column.tasks) {
+          index.set(task.id, { title: task.title, board: board.name });
+        }
+      }
+    }
+    return index;
+  }, [boards]);
+
+  const roster = (workingAgents ?? []).slice(0, ROSTER_LIMIT);
+  const rosterHidden = (workingAgents?.length ?? 0) - roster.length;
 
   const taskCount = useMemo(
     () =>
@@ -239,6 +267,9 @@ function BoardSpace3D({ boards, onOpenTask }: BoardSpace3DProps): ReactElement {
                               <div className="line-clamp-2 text-xs text-foreground">
                                 {task.title}
                               </div>
+                              <AgentMarkers
+                                agents={agentsByTask?.get(task.id) ?? []}
+                              />
                             </div>
                           </div>
                         </button>
@@ -278,6 +309,48 @@ function BoardSpace3D({ boards, onOpenTask }: BoardSpace3DProps): ReactElement {
           </button>
         ))}
       </div>
+
+      {(workingAgents?.length ?? 0) > 0 && (
+        <div className="absolute top-3 right-3 w-64 rounded-md border border-border/60 bg-card/85 p-2 shadow-lg backdrop-blur-sm">
+          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium text-foreground">
+            <Bot className="h-3 w-3" />
+            {t("tasks:agents.working", { count: workingAgents?.length ?? 0 })}
+          </div>
+          <ul className="space-y-1">
+            {roster.map((agent) => {
+              const task = taskIndex.get(agent.taskId);
+              return (
+                <li key={`${agent.taskId}:${agent.agentKey}`}>
+                  <button
+                    type="button"
+                    onClick={() => onOpenTask?.(agent.projectId, agent.taskId)}
+                    className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left transition-colors hover:bg-accent/50"
+                  >
+                    <span
+                      className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${STATE_STYLES[agent.state]}`}
+                    />
+                    <span className="min-w-0">
+                      <span className="block truncate text-[11px] text-foreground">
+                        {agent.agent}
+                      </span>
+                      <span className="block truncate text-[10px] text-muted-foreground">
+                        {agent.message ??
+                          task?.title ??
+                          t(`tasks:agents.state.${agent.state}`)}
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          {rosterHidden > 0 && (
+            <div className="px-1 pt-1 text-[10px] text-muted-foreground">
+              {t("tasks:boardSpace.more", { count: rosterHidden })}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="absolute right-3 bottom-3 flex items-center gap-2">
         <button

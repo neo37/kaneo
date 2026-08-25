@@ -1939,6 +1939,16 @@
 				"title": "Ningún tablero seleccionado",
 				"description": "Elige los tableros que quieres seguir a la vez: sus tarjetas se mueven aquí en tiempo real."
 			}
+		},
+		"agents": {
+			"working": "Agentes trabajando · {{count}}",
+			"state": {
+				"started": "tomada",
+				"progress": "trabajando",
+				"blocked": "bloqueado",
+				"finished": "terminado",
+				"failed": "fallido"
+			}
 		}
 	},
 	"invitations": {

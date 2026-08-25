@@ -1939,6 +1939,16 @@
 				"title": "尚未选择看板",
 				"description": "选择你想并排关注的看板，它们的卡片会在这里实时移动。"
 			}
+		},
+		"agents": {
+			"working": "工作中的智能体 · {{count}}",
+			"state": {
+				"started": "已接手",
+				"progress": "进行中",
+				"blocked": "受阻",
+				"finished": "已完成",
+				"failed": "已失败"
+			}
 		}
 	},
 	"invitations": {

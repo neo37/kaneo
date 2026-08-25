@@ -1939,6 +1939,16 @@
 				"title": "Pano seçilmedi",
 				"description": "Yan yana izlemek istediğiniz panoları seçin — kartları burada gerçek zamanlı olarak hareket eder."
 			}
+		},
+		"agents": {
+			"working": "Çalışan ajanlar · {{count}}",
+			"state": {
+				"started": "üstlendi",
+				"progress": "çalışıyor",
+				"blocked": "engellendi",
+				"finished": "bitirdi",
+				"failed": "başarısız"
+			}
 		}
 	},
 	"invitations": {

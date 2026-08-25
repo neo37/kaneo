@@ -1939,6 +1939,16 @@
 				"title": "선택된 보드가 없습니다",
 				"description": "나란히 지켜볼 보드를 고르세요. 카드가 여기에서 실시간으로 움직입니다."
 			}
+		},
+		"agents": {
+			"working": "작업 중인 에이전트 · {{count}}",
+			"state": {
+				"started": "맡음",
+				"progress": "작업 중",
+				"blocked": "막힘",
+				"finished": "완료",
+				"failed": "실패"
+			}
 		}
 	},
 	"invitations": {

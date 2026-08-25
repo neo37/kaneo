@@ -1939,6 +1939,16 @@
 				"title": "Belum ada papan dipilih",
 				"description": "Pilih papan yang ingin Anda pantau berdampingan — kartunya bergerak di sini secara langsung."
 			}
+		},
+		"agents": {
+			"working": "Agen sedang bekerja · {{count}}",
+			"state": {
+				"started": "diambil",
+				"progress": "bekerja",
+				"blocked": "terhambat",
+				"finished": "selesai",
+				"failed": "gagal"
+			}
 		}
 	},
 	"invitations": {

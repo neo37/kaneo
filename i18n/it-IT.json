@@ -1939,6 +1939,16 @@
 				"title": "Nessuna bacheca selezionata",
 				"description": "Scegli le bacheche da seguire affiancate: le loro schede si muovono qui in tempo reale."
 			}
+		},
+		"agents": {
+			"working": "Agenti al lavoro · {{count}}",
+			"state": {
+				"started": "presa in carico",
+				"progress": "al lavoro",
+				"blocked": "bloccato",
+				"finished": "completato",
+				"failed": "fallito"
+			}
 		}
 	},
 	"invitations": {

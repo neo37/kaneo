@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/menu";
 import getTasks from "@/fetchers/task/get-tasks";
 import useGetProjects from "@/hooks/queries/project/use-get-projects";
+import { useAgentActivity } from "@/hooks/use-agent-activity";
 import { MAX_BOARDS, useBoardSpaceStore } from "@/store/board-space";
 import type { ProjectWithTasks } from "@/types/project";
 
@@ -89,6 +90,8 @@ function RouteComponent() {
       }),
     [activeIds, results, projects],
   );
+
+  const { byTask, working, applyMessage } = useAgentActivity(activeIds);
 
   const openTask = (projectId: string, taskId: string) => {
     navigate({
@@ -156,7 +159,11 @@ function RouteComponent() {
         }
       >
         {activeIds.map((projectId) => (
-          <ProjectRealtime key={projectId} projectId={projectId} />
+          <ProjectRealtime
+            key={projectId}
+            projectId={projectId}
+            onMessage={applyMessage}
+          />
         ))}
         {boards.length === 0 ? (
           <Empty className="h-full">
@@ -172,7 +179,12 @@ function RouteComponent() {
           </Empty>
         ) : (
           <div className="h-full w-full">
-            <BoardSpace3D boards={boards} onOpenTask={openTask} />
+            <BoardSpace3D
+              boards={boards}
+              agentsByTask={byTask}
+              workingAgents={working}
+              onOpenTask={openTask}
+            />
           </div>
         )}
       </WorkspaceLayout>

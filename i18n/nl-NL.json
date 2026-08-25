@@ -1939,6 +1939,16 @@
 				"title": "Geen borden geselecteerd",
 				"description": "Kies de borden die je naast elkaar wilt volgen — hun kaarten bewegen hier in realtime."
 			}
+		},
+		"agents": {
+			"working": "Agents aan het werk · {{count}}",
+			"state": {
+				"started": "opgepakt",
+				"progress": "bezig",
+				"blocked": "geblokkeerd",
+				"finished": "klaar",
+				"failed": "mislukt"
+			}
 		}
 	},
 	"invitations": {

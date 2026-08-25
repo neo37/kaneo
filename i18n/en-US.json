@@ -1939,6 +1939,16 @@
 				"title": "No boards selected",
 				"description": "Pick the boards you want to watch side by side — their cards move here in real time."
 			}
+		},
+		"agents": {
+			"working": "Agents at work · {{count}}",
+			"state": {
+				"started": "picked up",
+				"progress": "working",
+				"blocked": "blocked",
+				"finished": "done",
+				"failed": "failed"
+			}
 		}
 	},
 	"invitations": {

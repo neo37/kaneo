@@ -1939,6 +1939,16 @@
 				"title": "Aucun tableau sélectionné",
 				"description": "Choisissez les tableaux à suivre côte à côte — leurs cartes se déplacent ici en temps réel."
 			}
+		},
+		"agents": {
+			"working": "Agents au travail · {{count}}",
+			"state": {
+				"started": "prise en charge",
+				"progress": "en cours",
+				"blocked": "bloqué",
+				"finished": "terminé",
+				"failed": "échec"
+			}
 		}
 	},
 	"invitations": {

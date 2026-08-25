@@ -7643,6 +7643,44 @@
 						"boardError",
 						"empty"
 					]
+				},
+				"agents": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"working": {
+							"type": "string"
+						},
+						"state": {
+							"type": "object",
+							"additionalProperties": false,
+							"properties": {
+								"started": {
+									"type": "string"
+								},
+								"progress": {
+									"type": "string"
+								},
+								"blocked": {
+									"type": "string"
+								},
+								"finished": {
+									"type": "string"
+								},
+								"failed": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"started",
+								"progress",
+								"blocked",
+								"finished",
+								"failed"
+							]
+						}
+					},
+					"required": ["working", "state"]
 				}
 			},
 			"required": [
@@ -7676,7 +7714,8 @@
 				"bulk",
 				"editor",
 				"board3d",
-				"boardSpace"
+				"boardSpace",
+				"agents"
 			]
 		},
 		"invitations": {

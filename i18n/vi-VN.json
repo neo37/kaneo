@@ -1939,6 +1939,16 @@
 				"title": "Chưa chọn bảng nào",
 				"description": "Chọn các bảng bạn muốn theo dõi cạnh nhau — thẻ của chúng di chuyển ở đây theo thời gian thực."
 			}
+		},
+		"agents": {
+			"working": "Tác nhân đang làm việc · {{count}}",
+			"state": {
+				"started": "đã nhận",
+				"progress": "đang làm",
+				"blocked": "bị chặn",
+				"finished": "đã xong",
+				"failed": "thất bại"
+			}
 		}
 	},
 	"invitations": {

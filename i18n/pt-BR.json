@@ -1939,6 +1939,16 @@
 				"title": "Nenhum quadro selecionado",
 				"description": "Escolha os quadros que quer acompanhar lado a lado — seus cartões se movem aqui em tempo real."
 			}
+		},
+		"agents": {
+			"working": "Agentes trabalhando · {{count}}",
+			"state": {
+				"started": "assumida",
+				"progress": "trabalhando",
+				"blocked": "bloqueado",
+				"finished": "concluído",
+				"failed": "falhou"
+			}
 		}
 	},
 	"invitations": {

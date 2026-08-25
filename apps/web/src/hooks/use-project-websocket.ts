@@ -17,9 +17,25 @@ const BASE_DELAY = 1000; // 1 second
 // We send a lightweight ping every 30 seconds to keep the connection alive.
 const WS_PING_INTERVAL_MS = 30_000;
 
-export function useProjectWebSocket(projectId: string) {
+type ProjectWebSocketOptions = {
+  /**
+   * Called for every message that arrives, before the cache invalidation.
+   *
+   * Most messages only say "something changed, refetch"; the agent connector
+   * is the exception — its payload is what gets drawn, and refetching a board
+   * on every tick of every agent would be a request storm.
+   */
+  onMessage?: (message: { type?: string } & Record<string, unknown>) => void;
+};
+
+export function useProjectWebSocket(
+  projectId: string,
+  { onMessage }: ProjectWebSocketOptions = {},
+) {
   const queryClient = useQueryClient();
   const { data: session } = authClient.useSession();
+  const onMessageRef = useRef(onMessage);
+  onMessageRef.current = onMessage;
   const wsRef = useRef<WebSocket | null>(null);
   const retriesRef = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -56,6 +72,7 @@ export function useProjectWebSocket(projectId: string) {
       ws.onmessage = (event) => {
         try {
           const message = JSON.parse(event.data);
+          onMessageRef.current?.(message);
           if (
             message.type === "TASK_UPDATED" ||
             message.type === "TASK_CREATED" ||

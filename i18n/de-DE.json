@@ -1939,6 +1939,16 @@
 				"title": "Keine Boards ausgewählt",
 				"description": "Wähle die Boards, die du nebeneinander beobachten möchtest — ihre Karten bewegen sich hier in Echtzeit."
 			}
+		},
+		"agents": {
+			"working": "Agenten im Einsatz · {{count}}",
+			"state": {
+				"started": "übernommen",
+				"progress": "arbeitet",
+				"blocked": "blockiert",
+				"finished": "fertig",
+				"failed": "fehlgeschlagen"
+			}
 		}
 	},
 	"invitations": {

@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import type { AgentPresence } from "@/hooks/use-agent-activity";
 import type { ProjectWithTasks } from "@/types/project";
 import BoardSpace3D, { type BoardSpaceBoard } from "./BoardSpace3D";
 
@@ -198,5 +199,74 @@ describe("BoardSpace3D", () => {
 
     fireEvent.click(screen.getByText("tasks:board3d.reset"));
     expect(world.style.transform).toBe(initial);
+  });
+});
+
+function presence(overrides: Partial<AgentPresence> = {}): AgentPresence {
+  return {
+    activityId: "a1",
+    taskId: "t1",
+    projectId: "p1",
+    agent: "капсула s03",
+    agentId: "capsule-s03",
+    agentKey: "capsule-s03",
+    state: "progress",
+    message: "Прогоняю тесты",
+    progress: 60,
+    avatarUrl: null,
+    url: null,
+    updatedAt: new Date().toISOString(),
+    isQuiet: false,
+    ...overrides,
+  };
+}
+
+describe("BoardSpace3D · agents", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("marks the card an agent is working on", () => {
+    render(
+      <BoardSpace3D
+        boards={[board("p1", "Cardflow", cardflow)]}
+        agentsByTask={new Map([["t1", [presence()]]])}
+      />,
+    );
+    expect(screen.getByText("капсула s03")).toBeTruthy();
+    expect(screen.getByText("60%")).toBeTruthy();
+  });
+
+  it("counts the agents it cannot fit on a card", () => {
+    const crowd = Array.from({ length: 5 }, (_, i) =>
+      presence({ agentKey: `capsule-s0${i}`, agent: `капсула s0${i}` }),
+    );
+    render(
+      <BoardSpace3D
+        boards={[board("p1", "Cardflow", cardflow)]}
+        agentsByTask={new Map([["t1", crowd]])}
+      />,
+    );
+    expect(screen.getByText("+2")).toBeTruthy();
+  });
+
+  it("lists working agents and opens the task one is on", () => {
+    const onOpenTask = vi.fn();
+    render(
+      <BoardSpace3D
+        boards={[board("p1", "Cardflow", cardflow)]}
+        agentsByTask={new Map([["t1", [presence()]]])}
+        workingAgents={[presence()]}
+        onOpenTask={onOpenTask}
+      />,
+    );
+    expect(screen.getByText("tasks:agents.working:1")).toBeTruthy();
+    fireEvent.click(screen.getAllByText("Прогоняю тесты")[0]);
+    expect(onOpenTask).toHaveBeenCalledWith("p1", "t1");
+  });
+
+  it("shows no roster when no agent is working", () => {
+    render(<BoardSpace3D boards={[board("p1", "Cardflow", cardflow)]} />);
+    expect(screen.queryByText("tasks:agents.working:0")).toBeNull();
   });
 });
