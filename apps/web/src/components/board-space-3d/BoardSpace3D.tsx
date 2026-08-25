@@ -25,7 +25,7 @@ type BoardSpace3DProps = {
 
 const COLUMN_WIDTH = 260;
 const COLUMN_GAP = 36;
-const BOARD_GAP = 280;
+const BOARD_GAP = 200;
 const PLACEHOLDER_COLUMNS = 4;
 // Beyond this a column stops listing cards and starts counting them: the
 // scene is meant to show movement across boards, and a column scrolled to its
@@ -49,6 +49,7 @@ function boardWidth(board: BoardSpaceBoard): number {
 function placeBoards(boards: BoardSpaceBoard[]): {
   placed: PlacedBoard[];
   totalWidth: number;
+  widestBoard: number;
 } {
   const widths = boards.map(boardWidth);
   const totalWidth =
@@ -60,31 +61,43 @@ function placeBoards(boards: BoardSpaceBoard[]): {
     const width = widths[index];
     const x = cursor + width / 2;
     cursor += width + BOARD_GAP;
-    // Outer boards recede and rotate inward, so the row reads as a room
-    // rather than a flat strip: without it the far boards are unreadable.
+    // Доски стоят дугой вокруг камеры, а не плоской лентой. Плоский ряд из
+    // трёх досок приходится отодвигать так далеко, что читать становится
+    // нечего; дуга уводит соседние доски вбок и вглубь, оставляя середину
+    // крупной, а повернуть к соседям можно кнопкой или мышью.
     const center = (boards.length - 1) / 2;
     const offset = boards.length > 1 ? (index - center) / center : 0;
-    return { board, x, width, ry: -offset * 22, z: -Math.abs(offset) * 260 };
+    return { board, x, width, ry: -offset * 34, z: -Math.abs(offset) * 520 };
   });
-  return { placed, totalWidth };
+  return { placed, totalWidth, widestBoard: Math.max(...widths, 0) };
 }
 
 function BoardSpace3D({ boards, onOpenTask }: BoardSpace3DProps): ReactElement {
   const { t } = useTranslation();
 
-  const { placed, totalWidth } = useMemo(() => placeBoards(boards), [boards]);
+  const { placed, widestBoard } = useMemo(() => placeBoards(boards), [boards]);
 
   const initialCamera = useCallback((): Camera => {
-    // Pull back far enough that the whole row fits, and no further.
-    const fit = -(totalWidth + 600) * (window.innerWidth < 768 ? 1.6 : 0.85);
+    // Отодвинуть камеру ровно настолько, чтобы ряд досок влез по ширине.
+    // При перспективе P объект на глубине |z| виден в P / (P + |z|) раз
+    // меньше, отсюда и формула: на глаз подобранный множитель уводил ряд
+    // в точку на горизонте, стоило добавить третью доску.
+    const viewport = window.innerWidth || 1280;
+    // Влезать должен не весь ряд целиком, а середина дуги с краями соседних
+    // досок: иначе карточки уменьшаются до нечитаемых. Ширина, которую надо
+    // уместить, считается от самой широкой доски, а не от суммы всех.
+    const focusWidth = widestBoard * 1.55;
+    const needed = PERSPECTIVE * (focusWidth / viewport - 1);
     return {
       x: 0,
-      y: 0,
-      z: Math.min(-1200, Math.max(-9000, fit)),
+      // Доски висят в верхней половине мира (заголовок над колонками), и при
+      // нулевой высоте камеры сцена липнет к потолку окна.
+      y: -140,
+      z: -Math.min(9000, Math.max(400, needed)),
       rx: 14,
       ry: 0,
     };
-  }, [totalWidth]);
+  }, [widestBoard]);
 
   const { viewportRef, worldRef, reset, flyTo } = useBoardCamera({
     initial: initialCamera,
