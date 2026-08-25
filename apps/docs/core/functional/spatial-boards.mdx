@@ -1,0 +1,93 @@
+---
+title: "Board space"
+description: "Several boards in one 3D space, with live agent activity on top of them."
+icon: "boxes"
+---
+
+The board space shows several boards at once, arranged in 3D, and — on top of
+them — the agents working on their tasks right now. It is meant for watching a
+fleet: a dozen automated workers spread across a dozen boards, where a flat list
+tells you nothing about where the work actually is.
+
+Open it from the sidebar: **Board space**. Pick which boards to show; the choice
+is stored per workspace in your browser, because it is a property of your desk,
+not of the workspace.
+
+## What you see
+
+**Boards** stand side by side and turn slightly toward the camera. Each carries a
+plate with its name, the task count, and — when agents are present — a pulsing
+count of them.
+
+**Tasks** sit in their columns. A card with an agent on it is outlined in green,
+so you can tell at a glance which work is being touched.
+
+**Agents** appear as chips above the column holding their task. Colour encodes
+state; hovering shows the agent, its capsule, and what it reported doing.
+
+| State | Meaning | Colour |
+|---|---|---|
+| `thinking` | working out the task | amber |
+| `editing` | changing code | blue |
+| `running` | building or testing | violet |
+| `waiting` | blocked on a person or another agent | grey |
+| `review` | checking someone else's work | cyan |
+| `done` | finished | green |
+| `failed` | gave up | red |
+
+Agents with no task — or whose task lives on a board you are not showing — wait
+on the dock beneath the board.
+
+**Moves** are drawn as a label flying from the old column to the new one
+whenever a task changes column. The direction is derived by comparing task
+placement before and after, so it also shows moves that happened while the tab
+was in the background.
+
+Camera: drag to pan, shift-drag or right-drag to rotate, wheel to zoom.
+
+## Reporting agent activity
+
+Agents report through a small HTTP surface. A report is a **presence mark with a
+lifetime**, not a log entry: an agent that stops reporting disappears on its own.
+That is deliberate — workers are disposable, and stale markers would make the
+screen lie.
+
+```bash
+curl -X POST https://kaneo.example/api/agent-activity \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: <better-auth key>' \
+  -d '{
+    "projectId": "<board id>",
+    "agentId": "s03",
+    "name": "Capsule s03",
+    "capsule": "s03",
+    "taskId": "<task id>",
+    "state": "editing",
+    "message": "adding the tag filter",
+    "ttlSeconds": 90
+  }'
+```
+
+Refresh the mark while the work continues — every 30 seconds is a good rhythm
+for the default 90-second lifetime. When the work ends, either report `done` /
+`failed` (the agent is dropped after ten seconds) or remove it outright:
+
+```bash
+curl -X DELETE 'https://kaneo.example/api/agent-activity/s03?projectId=<board id>'
+```
+
+`GET /api/agent-activity/{projectId}` returns the current snapshot. The screen
+uses it once on load; after that, updates arrive over the project WebSocket as
+`AGENT_PRESENCE` messages carrying the full snapshot rather than a delta.
+
+<Note>
+Presence lives in the memory of one API instance. Behind a load balancer each
+instance sees only its own agents, so a multi-instance deployment needs
+presence moved into Redis alongside the existing broadcast adapter.
+</Note>
+
+## Where the agent ids come from
+
+The `agentId` groups reports into one marker, so it has to be stable for the
+lifetime of the work. A process handling several tasks at once needs a compound
+id — one marker per task, not one per process.
